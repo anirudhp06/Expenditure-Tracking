@@ -47,51 +47,47 @@ function insertData(){
 }
 
 function getData(){
-    if(enterParticular.value=="" || enterRate.value==""){
-        alert("Please enter all the fields");
-    }else{
-        const dbref=ref(db);
-        get(child(dbref,enterDate.value+"/"))
-        .then((snapshot)=>{
-            if(snapshot.exists()){
-                var dict=[];
-                var data=snapshot.val();
-                for(var key in data){
-                    dict.push({
-                        date:enterDate.value,
-                        particular:data[key].Particular,
-                        rate:data[key].Rate
-                    });
-                }
-                var headers=["Date","Particular","Rate"];
-                if(myTable.firstChild) myTable.removeChild(myTable.firstChild);
-                let table= document.createElement("table");
-                let headerRow= document.createElement("tr");
-                headers.forEach(headerText=>{
-                    let header= document.createElement("th");
-                    let textNode= document.createTextNode(headerText);
-                    header.appendChild(textNode);
-                    headerRow.appendChild(header);
+    const dbref=ref(db);
+    get(child(dbref,enterDate.value+"/"))
+    .then((snapshot)=>{
+        if(snapshot.exists()){
+            var dict=[];
+            var data=snapshot.val();
+            for(var key in data){
+                dict.push({
+                    date:enterDate.value,
+                    particular:data[key].Particular,
+                    rate:data[key].Rate
                 });
-                table.appendChild(headerRow);
-                myTable.appendChild(table);
-
-                dict.forEach(emp =>{
-                    let row= document.createElement("tr");
-                    Object.values(emp).forEach(text=>{
-                        let cell= document.createElement("td");
-                        let textNode= document.createTextNode(text);
-                        cell.appendChild(textNode);
-                        row.appendChild(cell);
-                    });
-                    table.appendChild(row);
-                });
-                myTable.appendChild(table);
-            }else{
-                alert("No data available");
             }
-        })
-    }   
+            var headers=["Date","Particular","Rate"];
+            if(myTable.firstChild) myTable.removeChild(myTable.firstChild);
+            let table= document.createElement("table");
+            let headerRow= document.createElement("tr");
+            headers.forEach(headerText=>{
+                let header= document.createElement("th");
+                let textNode= document.createTextNode(headerText);
+                header.appendChild(textNode);
+                headerRow.appendChild(header);
+            });
+            table.appendChild(headerRow);
+            myTable.appendChild(table);
+
+            dict.forEach(emp =>{
+                let row= document.createElement("tr");
+                Object.values(emp).forEach(text=>{
+                    let cell= document.createElement("td");
+                    let textNode= document.createTextNode(text);
+                    cell.appendChild(textNode);
+                    row.appendChild(cell);
+                });
+                table.appendChild(row);
+            });
+            myTable.appendChild(table);
+        }else{
+            alert("No data available");
+        }
+    })   
 }
 
 submitBtn.addEventListener("click",insertData);
