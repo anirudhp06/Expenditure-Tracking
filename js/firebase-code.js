@@ -52,6 +52,7 @@ function getData(){
     .then((snapshot)=>{
         if(snapshot.exists()){
             var dict=[];
+            var total=0;
             var data=snapshot.val();
             for(var key in data){
                 dict.push({
@@ -59,8 +60,9 @@ function getData(){
                     particular:data[key].Particular,
                     rate:data[key].Rate
                 });
+                total+=parseInt(data[key].Rate);
             }
-            var headers=["Date","Particular","Rate"];
+            var headers=["Date","Particular","Rate","Total"];
             if(myTable.firstChild) myTable.removeChild(myTable.firstChild);
             let table= document.createElement("table");
             let headerRow= document.createElement("tr");
@@ -72,6 +74,8 @@ function getData(){
             });
             table.appendChild(headerRow);
             myTable.appendChild(table);
+            
+            var done=false;
 
             dict.forEach(emp =>{
                 let row= document.createElement("tr");
@@ -81,6 +85,13 @@ function getData(){
                     cell.appendChild(textNode);
                     row.appendChild(cell);
                 });
+                if(done==false){
+                    let cell= document.createElement("td");
+                    let textNode= document.createTextNode(total);
+                    cell.appendChild(textNode);
+                    row.appendChild(cell);
+                    done=true;
+                }
                 table.appendChild(row);
             });
             myTable.appendChild(table);
