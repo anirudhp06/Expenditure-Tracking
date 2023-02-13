@@ -1,17 +1,28 @@
 <html>
     <head>
         <title>Expenditure Tracking</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/firebase-code.js"></script>
     </head>
     <body>
-        <h1>Expenditure Tracking</h1>
-        <h1><center>Initial Commit</center></h1>
-        <!-- <p>Enter your expenditure details below</p>
-        <form action="expenditure.php" method="post">
-            <p>Amount: <input type="text" name="amount" /></p>
-            <p>Category: <input type="text" name="category" /></p>
-            <p>Date: <input type="text" name="date" /></p>
-            <p><input type="submit" /></p>
-        </form> -->
+        <h1><center>Expenditure Tracking</center></h1>
+        <div>
+            <Label>Enter Particular Name:</Label>
+            <input type="text" id="particular" placeholder="Enter Particular Name">
+            <br><br>
+            <Label>Enter Rate:</Label>
+            <input type="number" id="rate" placeholder="Enter Rate">
+            <br><br>
+            <Label>Enter Date:</Label>
+            <input type="date" id="Date" placeholder="Enter Date">
+            <br><br>
+            <button id="submit">Submit</button>
+        </div><br><br>
+        <div id="retrieve">
+            <button id="get">Get Expenditure</button>
+            <div id="table"></div>
+        </div>
     </body>
 </html>
