@@ -47,7 +47,6 @@ function insertData(){
 }
 
 function getData(){
-    if(enterDate.value=" "||enterDate.value==""){
     const dbref=ref(db);
     get(child(dbref,enterDate.value+"/"))
     .then((snapshot)=>{
@@ -99,10 +98,7 @@ function getData(){
         }else{
             alert("No data available");
         }
-    })
-    }else{
-        alert("Please enter date");
-    }   
+    })  
 }
 
 submitBtn.addEventListener("click",insertData);
