@@ -27,5 +27,21 @@ console.log("Provider Initialized");
 
 var signUp=document.querySelector("#sign-up");
 signUp.addEventListener("click",()=>{
-    signInWithPopup(auth,provider);
+    signInWithPopup(auth,provider)
+    .then((result)=>{
+        const credential=GoogleAuthProvider.credentialFromResult(result);
+        console.log("credential:",credential);
+        const token=credential.accessToken;
+        console.log("token:",token);
+        //Signed in USER info
+        const user=result.user;
+        console.log("User:",user);
+    }).catch((error)=>{
+        const errorCode=error.code;
+        const errorMessage=error.message;
+        //Email used
+        const email=error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+    });
 });
