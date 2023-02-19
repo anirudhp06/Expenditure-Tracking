@@ -112,7 +112,7 @@ function signIn(){
     .then((result)=>{
         const credential=GoogleAuthProvider.credentialFromResult(result);
         alert("Logged In Successfully, now u can insert data");
-    }).catch((errpr)=>{
+    }).catch((error)=>{
         const errorCode=error.code;
         const errorMessage=error.message;
         const email=error.customData.email;
