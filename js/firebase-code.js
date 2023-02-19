@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+import {getAuth,GoogleAuthProvider,signInWithPopup} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,9 +20,14 @@ const app = initializeApp(firebaseConfig);
 import{getDatabase, set,get,remove,update,ref,child} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
 
 const db=getDatabase();
+const auth=getAuth(app);
+console.log("Auth Initialized");
+const provider=new GoogleAuthProvider();
+console.log("Provider Initialized");
 
 let submitBtn=document.querySelector("#submit");
 let getBtn=document.querySelector("#get");
+let signBtn=document.querySelector("#sign");
 
 let myTable=document.querySelector("#table");
 
@@ -101,5 +107,24 @@ function getData(){
     })  
 }
 
+function signIn(){
+    signInWithPopup(auth,provider)
+    .then((result)=>{
+        const credential=GoogleAuthProvider.credentialFromResult(result);
+        alert("Logged In Successfully, now u can insert data");
+    }).catch((errpr)=>{
+        const errorCode=error.code;
+        const errorMessage=error.message;
+        const email=error.customData.email;
+        const credential=GoogleAuthProvider.credentialFromError(error);
+
+        console.log("Error Code:"+errorCode);
+        console.log("Error Message:"+error<errorMessage);
+        console.log("Email:"+email);
+        console.log("Credential:"+credential);
+    })
+}
+
+signBtn.addEventListener("click",signIn);
 submitBtn.addEventListener("click",insertData);
 getBtn.addEventListener("click",getData);
