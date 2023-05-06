@@ -1,5 +1,3 @@
-# README WILL BE UPDATED ONCE PROJECT IS FULLY COMPLETED.
-
 ## About webpage
 1. This webpage is available to checkout at [https://anirudhp06.github.io/Expenditure-Tracking/](https://anirudhp06.github.io/Expenditure-Tracking/)
 
@@ -14,5 +12,14 @@
 
 6. Currently stored data inside db are:
 
-| Key | Value 
-| --- | ---|
+| Date | Name | Amount 
+| --- | ---| --- |
+| 2023-02-10| Frooti Mango | 12
+| 2023-02-11| Kurkure | 8
+| 2023-02-13| Nescafe Hazzelnut | 36
+| 2023-02-14| Apple | 50
+| 2023-04-25| Onion Utappa | 50
+| 2023-04-26| blr-ubl | 892
+| 2023-04-26| saviruchi | 138
+| 2023-04-26| ubl-blr | 1190
+| 2023-05-02| blr-yelahanka | 359
