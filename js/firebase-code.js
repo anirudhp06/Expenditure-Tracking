@@ -39,6 +39,10 @@ function insertData(){
     if(enterParticular.value=="" || enterRate.value==""){
         alert("Please enter all the fields");
     }else{
+        if(enterRate.value<0){
+            alert("Price should not be negative!");
+            return;
+        }
         set(ref(db,enterDate.value+"/"+enterParticular.value),{
             Particular:enterParticular.value,
             Rate:enterRate.value
