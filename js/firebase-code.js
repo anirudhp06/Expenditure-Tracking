@@ -29,6 +29,9 @@ let submitBtn=document.querySelector("#submit");
 let getBtn=document.querySelector("#get");
 let signBtn=document.querySelector("#sign");
 
+var signName=document.getElementById("signInfo");
+var signOutBtn=document.getElementById("signOut");
+
 let myTable=document.querySelector("#table");
 
 var enterParticular=document.querySelector("#particular");
@@ -116,6 +119,13 @@ function signIn(){
     .then((result)=>{
         const credential=GoogleAuthProvider.credentialFromResult(result);
         alert("Logged In Successfully, now u can insert data");
+        
+        signBtn.style.display="none";
+        signName.innerHTML="Welcome "+result.user.displayName;
+        signName.style.display="block";
+
+        signOutBtn.style.display="block";
+        signOutBtn.innerHTML="Sign Out";
     }).catch((error)=>{
         const errorCode=error.code;
         const errorMessage=error.message;
@@ -129,6 +139,19 @@ function signIn(){
     })
 }
 
+function signOut(){
+    auth.signOut().then(()=>{
+        alert("Signed Out");
+        signName.style.display="none";
+        signBtn.style.display="block";
+        signIn.style.display="block";
+        signOutBtn.style.display="none";
+    }).catch((error)=>{
+        alert(error);
+    })
+}
+
 signBtn.addEventListener("click",signIn);
 submitBtn.addEventListener("click",insertData);
 getBtn.addEventListener("click",getData);
+signOutBtn.addEventListener("click",signOut);

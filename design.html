@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenditure Tracking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="js/firebase-code.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="css/design.css">
+</head>
+<body>
+    <h1>Expenditure Tracking</h1>
+    <h3 id="signInfo"  hidden align="right"></h3>
+    <button id="signOut" style="float: right; width: auto;" hidden>Sign out</button>
+    <div class="container">
+        <label for="particular">Enter Particular Name:</label>
+        <input type="text" id="particular" placeholder="Enter Particular Name">
+        <label for="rate">Enter Rate:</label>
+        <input type="number" id="rate" placeholder="Enter Rate">
+        <label for="Date">Enter Date:</label>
+        <input type="date" id="Date" placeholder="Enter Date">
+        <button id="submit">Submit</button>
+        <button id="sign">Sign in</button>
+    </div>
+    <div id="retrieve" class="container">
+        <button id="get">Get Expenditure</button>
+        <div id="table"></div>
+    </div>
+    <div class="container">
+        <a href="https://github.com/anirudhp06/Expenditure-Tracking" target="_blank">GitHub Link</a>
+        <p>Please refer the GitHub repository for sample data.</p>
+    </div>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
+</html>
