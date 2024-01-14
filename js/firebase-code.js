@@ -78,6 +78,7 @@ function getData(){
             var headers=["Date","Particular","Rate","Total"];
             if(myTable.firstChild) myTable.removeChild(myTable.firstChild);
             let table= document.createElement("table");
+            table.setAttribute('class','table table-dark');
             let headerRow= document.createElement("tr");
             headers.forEach(headerText=>{
                 let header= document.createElement("th");
