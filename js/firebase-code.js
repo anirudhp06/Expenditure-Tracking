@@ -40,10 +40,10 @@ var enterDate=document.querySelector("#Date");
 
 function insertData(){
     if(enterParticular.value=="" || enterRate.value==""){
-        alert("Please enter all the fields");
+        displayMessage("Please enter all the fields");
     }else{
         if(enterRate.value<0){
-            alert("Price should not be negative!");
+            displayMessage("Price should not be negative!");
             return;
         }
         set(ref(db,enterDate.value+"/"+enterParticular.value),{
@@ -51,7 +51,7 @@ function insertData(){
             Rate:enterRate.value
         })
         .then(()=>{
-            alert("Data Inserted");
+            displayMessage("Data Inserted");
         })
         .catch((error)=>{
             alert(error);
@@ -61,6 +61,8 @@ function insertData(){
 
 function getData(){
     const dbref=ref(db);
+    if(enterDate.value=="")
+        {displayMessage("Please enter valid date");return;}
     get(child(dbref,enterDate.value+"/"))
     .then((snapshot)=>{
         if(snapshot.exists()){
@@ -111,7 +113,7 @@ function getData(){
             myTable.appendChild(table);
             divTable.style.display="block";
         }else{
-            alert("No data available");
+            displayMessage("No data available");
         }
     })  
 }
@@ -120,7 +122,7 @@ function signIn(){
     signInWithPopup(auth,provider)
     .then((result)=>{
         const credential=GoogleAuthProvider.credentialFromResult(result);
-        alert("Logged In Successfully, now u can insert data");
+        displayMessage("Logged In Successfully, now u can insert data");
         
         signBtn.style.display="none";
         signName.innerHTML="Welcome "+result.user.displayName;
@@ -143,16 +145,21 @@ function signIn(){
 
 function signOut(){
     auth.signOut().then(()=>{
-        alert("Signed Out");
         signName.style.display="none";
         signBtn.style.display="block";
-        signIn.style.display="block";
         signOutBtn.style.display="none";
+        displayMessage("Signed Out");
     }).catch((error)=>{
         alert(error);
     })
 }
 
+function displayMessage(msg) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    x.innerHTML=msg;
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
 signBtn.addEventListener("click",signIn);
 submitBtn.addEventListener("click",insertData);
 getBtn.addEventListener("click",getData);
