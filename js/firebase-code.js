@@ -88,7 +88,7 @@ function getData(){
             });
             table.appendChild(headerRow);
             myTable.appendChild(table);
-            
+            var divTable=document.getElementById("table");
             var done=false;
 
             dict.forEach(emp =>{
@@ -109,6 +109,7 @@ function getData(){
                 table.appendChild(row);
             });
             myTable.appendChild(table);
+            divTable.style.display="block";
         }else{
             alert("No data available");
         }
