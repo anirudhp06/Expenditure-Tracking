@@ -159,7 +159,7 @@ function displayMessage(msg) {
     x.className = "show";
     x.innerHTML=msg;
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-  }
+}
 signBtn.addEventListener("click",signIn);
 submitBtn.addEventListener("click",insertData);
 getBtn.addEventListener("click",getData);
