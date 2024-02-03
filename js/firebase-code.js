@@ -118,11 +118,25 @@ function getData(){
     })  
 }
 
-function signIn(){
+function signIn(page){
     signInWithPopup(auth,provider)
     .then((result)=>{
         const credential=GoogleAuthProvider.credentialFromResult(result);
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function() {
+            if(xhr.readyState===XMLHttpRequest.DONE){
+                if(xhr.status==200){
+                    document.body.innerHTML=xhr.responseText;
+                }else{
+                    alert("Cannot load webpage");
+                }
+            }
+        }
+        xhr.open('GET',"design"+".html",true);
+        xhr.send();
         displayMessage("Logged In Successfully, now u can insert data");
+        let cssLink=document.getElementById("cssProperty");
+        CSSPropertyRule.href="design.css";
         
         signBtn.style.display="none";
         signName.innerHTML="Welcome "+result.user.displayName;

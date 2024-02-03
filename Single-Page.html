@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Single Page travelling</title>
+    </head>
+    <body>
+        <div id="Content-Header"></div>
+        <button onclick="login('/index')" id="clicking">Click me for loading an web page</button>
+        <script>
+            function login(page){
+                var xhr=new XMLHttpRequest();
+                xhr.onreadystatechange=function() {
+                    if(xhr.readyState===XMLHttpRequest.DONE){
+                        if(xhr.status==200){
+                            document.getElementById('Content-Header').innerHTML=xhr.responseText;
+                            document.getElementById("clicking").style.display="none";
+                        }else{
+                            alert("Cannot load webpage");
+                        }
+                    }
+                }
+                xhr.open('GET',page+".html",true);
+                xhr.send();
+            }
+        </script>
+    </body>
+</html>
