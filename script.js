@@ -15,7 +15,8 @@ const calendar = document.querySelector(".calendar"),
   addParticularName = document.querySelector(".event-name "),
   addParticularRate = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
-  addEventSubmit = document.querySelector(".add-event-btn ");
+  addEventSubmit = document.getElementById("submit"),
+  addEventLogin=document.getElementById("login");
 
 let today = new Date();
 let activeDay;
@@ -392,7 +393,7 @@ addEventSubmit.addEventListener("click", () => {
     Rate:particularRate
   })
   .catch((error)=>{
-    alert(error);
+    alert(error+" Check if you logged in or not");
   })
   addEventWrapper.classList.remove("active");
   addParticularName.value = "";
@@ -403,6 +404,18 @@ addEventSubmit.addEventListener("click", () => {
   if (!activeDayEl.classList.contains("event")) {
     activeDayEl.classList.add("event");
   }
+});
+
+addEventLogin.addEventListener("click",()=>{
+  signInWithPopup(auth,provider)
+  .then((result)=>{
+    console.log(result);
+    alert("Logged in Successfully");
+  })
+  .catch((error)=>{
+    console.log(error);
+    alert("Error Occured");
+  })
 });
 
 //function to delete event when clicked on event
