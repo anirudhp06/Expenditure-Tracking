@@ -12,8 +12,8 @@ const calendar = document.querySelector(".calendar"),
   addEventBtn = document.querySelector(".add-event"),
   addEventWrapper = document.querySelector(".add-event-wrapper "),
   addEventCloseBtn = document.querySelector(".close "),
-  addEventTitle = document.querySelector(".event-name "),
-  addEventFrom = document.querySelector(".event-time-from "),
+  addParticularName = document.querySelector(".event-name "),
+  addParticularRate = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
 
@@ -341,8 +341,8 @@ document.addEventListener("click", (e) => {
 });
 
 //allow 50 chars in eventtitle
-addEventTitle.addEventListener("input", (e) => {
-  addEventTitle.value = addEventTitle.value.slice(0, 60);
+addParticularName.addEventListener("input", (e) => {
+  addParticularName.value = addParticularName.value.slice(0, 60);
 });
 
 // function defineProperty() {
@@ -379,16 +379,24 @@ addEventTitle.addEventListener("input", (e) => {
 
 //function to add event to eventsArr
 addEventSubmit.addEventListener("click", () => {
-  const eventTitle = addEventTitle.value;
-  const eventTimeFrom = addEventFrom.value;
-  if (eventTitle === "" || eventTimeFrom === "") {
-    alert("Please fill all the fields");
+  const particularName = addParticularName.value;
+  const particularRate = addParticularRate.value;
+  if (particularName === "" || particularRate === "" || particularRate < 1) {
+    alert("Please fill all the fields correctly");
     return;
   }
   console.log(eventsArr);
+  updatedInput=cleanseDate(year, month + 1, activeDay);
+  set(ref(db,updatedInput+"/"+particularName),{
+    Particular:particularName,
+    Rate:particularRate
+  })
+  .catch((error)=>{
+    alert(error);
+  })
   addEventWrapper.classList.remove("active");
-  addEventTitle.value = "";
-  addEventFrom.value = "";
+  addParticularName.value = "";
+  addParticularRate.value = "";
   updateEvents(activeDay);
   //select active day and add event class if not added
   const activeDayEl = document.querySelector(".day.active");
