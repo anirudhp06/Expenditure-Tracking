@@ -22,6 +22,7 @@ let today = new Date();
 let activeDay;
 let month = today.getMonth();
 let year = today.getFullYear();
+let loggedIn=0;
 
 const months = [
   "January",
@@ -405,17 +406,34 @@ addEventSubmit.addEventListener("click", () => {
     activeDayEl.classList.add("event");
   }
 });
+function signOut(){
+  auth.signOut().then(()=>{
+      alert("Signed Out");
+      document.getElementById('login').innerHTML="Login";
+      loggedIn=0;
+  }).catch((error)=>{
+      alert(error);
+  })
+}
 
-addEventLogin.addEventListener("click",()=>{
-  signInWithPopup(auth,provider)
-  .then((result)=>{
-    console.log(result);
-    alert("Logged in Successfully");
-  })
-  .catch((error)=>{
-    console.log(error);
-    alert("Error Occured");
-  })
+addEventLogin.addEventListener("click", () => {
+  if (loggedIn == 0) {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+        if (loggedIn == 0) {
+          alert("Logged in Successfully");
+          document.getElementById('login').innerHTML="Logout";
+          loggedIn = 1;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error Occured");
+      });
+  } else {
+    signOut();
+  }
 });
 
 //function to delete event when clicked on event

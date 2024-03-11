@@ -468,6 +468,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   padding: 5px 10px;
+  margin-right: 10px;
   border: 1px solid var(--primary-clr);
 }
 .add-event-footer .add-event-btn:hover {
